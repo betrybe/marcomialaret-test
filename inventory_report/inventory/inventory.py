@@ -1,4 +1,6 @@
 from inventory_report.importer.csv_importer import CsvImporter
+from inventory_report.importer.json_importer import JsonImporter
+
 from inventory_report.reports.complete_report import CompleteReport
 from inventory_report.reports.simple_report import SimpleReport
 
@@ -9,6 +11,9 @@ class Inventory:
         ext = path_file.split('.')[1]
         if ext == "csv":
             data = CsvImporter().import_data(path_file)
+        elif ext == "json":
+            data = JsonImporter().import_data(path_file)
+        return cls.generate(data, report_type)
         
     @classmethod
     def generate(cls, data, report_type):
